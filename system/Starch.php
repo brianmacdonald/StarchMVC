@@ -9,9 +9,7 @@ require_once BASE_DIR.'/system/config.php';
 
 require_once BASE_DIR.'/system/Apps.php';
 require_once BASE_DIR.'/system/Starch/Router.php';
-
-//Require libs
-require_once BASE_DIR.'/lib/Smarty/Smarty.class.php';
+require_once BASE_DIR.'/system/Starch/Template.php';
 
 $router = new Starch_Router;
 
@@ -71,8 +69,17 @@ class Starch
      */
     public function Starch(Starch_Config $config)
     {
-        $apps = new Apps($config);
+        $this->_loadApps();
         return null;
+    }
+
+    private function _loadApps()
+    {
+        if(count($this->config->apps)){
+            foreach($this->config->apps as $app){ 
+                require_once BASE_DIR.'/apps/'.$app.'/'.$app.'.php';
+            }
+        }
     }
 
 }

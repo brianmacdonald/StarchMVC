@@ -13,6 +13,6 @@ class Starch_Config
 
     var $apps = array(
         'hello_world'
-        );
+    );
 
 }

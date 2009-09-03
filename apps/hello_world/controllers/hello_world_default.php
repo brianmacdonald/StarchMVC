@@ -10,17 +10,17 @@
 /* Sample app for framework.
  *
  */
-class hello_world_default
+class hello_world_default extends App
 {
 
     public function welcome()
     {
        
-        $smarty = new Smarty;
+        $this->buildTemplate();
 
-        $smarty->assign('name', 'Hello World');
+        $this->assignTag('name', 'Hello World');
 
-        $smarty->display(BASE_DIR.'/apps/hello_world/views/base.html');    
+        $this->render(BASE_DIR.'/apps/hello_world/views/base.html');    
 
     }
 
