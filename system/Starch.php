@@ -7,14 +7,11 @@
 
 require_once BASE_DIR.'/system/config.php';
 
-require_once BASE_DIR.'/system/apps.php';
+require_once BASE_DIR.'/system/Apps.php';
 require_once BASE_DIR.'/system/Starch/Router.php';
 
 //Require libs
 require_once BASE_DIR.'/lib/Smarty/Smarty.class.php';
-
-$config = new Config();
-$apps = new Apps($config);
 
 $router = new Starch_Router;
 
@@ -63,3 +60,19 @@ else
 }
 
 
+/* Abstraction to allow config class to be dynamic.
+ *
+ */
+class Starch
+{
+    /* Starts the framework
+     * @param Starch_Config
+     * @return null;
+     */
+    public function Starch(Starch_Config $config)
+    {
+        $apps = new Apps($config);
+        return null;
+    }
+
+}

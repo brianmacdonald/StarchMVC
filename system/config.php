@@ -1,6 +1,6 @@
 <?php
 
-class Config
+class Starch_Config
 { 
 
     var $database_type = 'mysql';

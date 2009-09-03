@@ -7,31 +7,21 @@
  */
 define("BASE_DIR", dirname(__FILE__));      
 
-require_once 'system/Starch.php';
+require_once BASE_DIR.'/system/Starch.php';
+require_once BASE_DIR.'/system/config.php';
 
-/*
- * temp
+$config = new Starch_Config;    
+
+/* This will hold the code to start the framework.
  *
-
-   
-require_once('apps/hello_world/controllers/core.php');
-
-$view = new hello_world_welcome;
-
-$view->welcome();
-
-*
- * end temp
- */  
-
-
-class Init
+ */
+class Init extends Starch
 {
 
     /**
      * @return null
      */
-    public function Init()
+    public function my_addon_method()
     {
         return null;
     }
@@ -39,6 +29,6 @@ class Init
 }
 
 //run code
-$init = new Init();
+$init = new Init($config);
 
 //thanks

@@ -2,7 +2,7 @@
 
 class Apps{
 
-    public function Apps(Config $config)
+    public function Apps(Starch_Config $config)
     {
         $this->config = $config;
 

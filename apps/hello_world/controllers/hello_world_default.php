@@ -7,7 +7,7 @@
  */
 
 
-/* Sample app for frame work.
+/* Sample app for framework.
  *
  */
 class hello_world_default
