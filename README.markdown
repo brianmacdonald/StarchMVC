@@ -6,5 +6,6 @@ A Lightweight PHP framework. Currently at very early stages and should NOT BE US
 Dependencies
 ------------
 
- -Smarty Templates
- -Outlet ORM
+ - Smarty Templates
+ - Outlet ORM
+ - php-router
