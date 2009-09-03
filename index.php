@@ -8,7 +8,7 @@
 define("BASE_DIR", dirname(__FILE__));      
 
 
-require_once 'system/index.php';
+require_once 'system/Starch.php';
 
 /*
  * temp
@@ -39,7 +39,7 @@ class Init
 
 }
 
-class base_router extends Router
+class Site_Router extends Starch_Router
 {
     var $baseurls = 'test';  
 
@@ -52,7 +52,7 @@ class base_router extends Router
 
 
 
-$router = new base_router;
+$router = new Site_Router;
 
 //run code
 $init = new Init($router->baseurls);

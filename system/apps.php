@@ -5,13 +5,17 @@ class Apps{
     public function Apps(Config $config)
     {
         $this->config = $config;
+
+        //load apps from config
+        $this->_loadApps();
+
         return null;
     }
 
-    public function loadApps()
+    private function _loadApps()
     {
         foreach($this->config->apps as $app){ 
-            require_once BASE_DIR.'/apps/'.$app.'/index.php';
+            require_once BASE_DIR.'/apps/'.$app.'/'.$app.'.php';
         }
     }
 
