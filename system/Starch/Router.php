@@ -21,3 +21,9 @@ class Starch_Dispatcher extends Starch_PHP_Dispatcher
 
 
 }
+
+class Starch_Route extends Starch_PHP_Route
+{
+
+
+}
