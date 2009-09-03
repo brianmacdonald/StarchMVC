@@ -10,7 +10,7 @@ require_once BASE_DIR.'/lib/Smarty/Smarty.class.php';
 
 $config = new Config();
 
-$router = new Router($config);
+$router = new Starch_Router($config);
 $apps = new Apps($config);
 
 $apps->loadApps();

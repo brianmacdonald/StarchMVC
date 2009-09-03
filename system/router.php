@@ -1,10 +1,12 @@
 <?php 
 
+require_once BASE_DIR.'/lib/php-router/php-router.php'; 
+
 /* Url router class
  *
  *
  */
-class Router
+class Starch_Router
 {
     /**
      * @return null
