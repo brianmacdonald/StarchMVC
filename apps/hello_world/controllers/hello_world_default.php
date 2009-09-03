@@ -1,8 +1,20 @@
 <?php
+/* StarchMVC
+ *
+ *
+ *
+ *
+ */
 
-class hello_world_welcome{
 
-    public function welcome(){
+/* Sample app for frame work.
+ *
+ */
+class hello_world_default
+{
+
+    public function welcome()
+    {
        
         $smarty = new Smarty;
 

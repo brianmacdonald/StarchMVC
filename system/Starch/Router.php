@@ -12,12 +12,12 @@ require_once BASE_DIR.'/system/Starch/Router/php_router_wrapper.php';
  */
 class Starch_Router extends Starch_PHP_Router
 {
-    /*
-     * return null
-     */
-    public function Starch_Router()
-    {
-        return null;
-    }
+
+
+}
+
+class Starch_Dispatcher extends Starch_PHP_Dispatcher
+{
+
 
 }

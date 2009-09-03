@@ -16,3 +16,13 @@ class Starch_PHP_Router extends Router
  //wrapper
 
 }
+
+/*
+ *
+ */
+class Starch_PHP_Dispatcher extends Dispatcher 
+{
+
+    //wrapper
+
+}
