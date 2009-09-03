@@ -7,7 +7,7 @@
 
 require_once BASE_DIR.'/system/config.php';
 
-require_once BASE_DIR.'/system/Apps.php';
+require_once BASE_DIR.'/system/App.php';
 require_once BASE_DIR.'/system/Starch/Router.php';
 require_once BASE_DIR.'/system/Starch/Template.php';
 
