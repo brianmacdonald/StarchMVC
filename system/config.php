@@ -11,6 +11,8 @@ class Starch_Config
 
     var $base_url = '/lead/';
 
+    var $app_suffix = '_default';
+
     var $apps = array(
         'hello_world'
     );

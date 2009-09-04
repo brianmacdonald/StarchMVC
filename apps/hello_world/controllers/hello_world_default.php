@@ -34,6 +34,25 @@ class hello_world_default extends App
 
     }
 
+    public function colors()
+    {
+        //This will be a database object
+        $colors = array(
+            'Red',
+            'Blue',
+            'Yellow',
+            'Green',
+            );  
+
+        $context = array(
+            'name'=>'another test',
+            'colors'=>$colors,
+        );
+
+        $this->render($context, 'hello_world/views/base.html');        
+
+    }
+
 }
 
 

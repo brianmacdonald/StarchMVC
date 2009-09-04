@@ -11,95 +11,90 @@ require_once BASE_DIR.'/system/App.php';
 require_once BASE_DIR.'/system/Starch/Router.php';
 require_once BASE_DIR.'/system/Starch/Template.php';
 
-$router = new Starch_Router;
 
-//Create a new instance of Dispatcher (again, you would probably utilize a
-// factory or container)
-$dispatcher = new Starch_Dispatcher;
-$dispatcher->setSuffix('_default');
-$dispatcher->setClassPath(BASE_DIR.'/apps/hello_world/controllers/');
-
-//Set up a 'catch all' default route and add it to the Router.
-//You may want to set up an external file, define your routes there, and
-// and include that file in place of this code block.
-$default_route = new Route('/starch/');
-$default_route->setMapClass( 'hello_world' ); //matches any :class
-$default_route->setMapMethod( 'welcome' );
-$router->addRoute( 'default', $default_route );
-
-//Find the Route for your url
-$url            = urldecode($_SERVER['REQUEST_URI']);
-$found_route    = $router->findRoute($url);
-
-//Dispatch the Route
-if( FALSE === $found_route )
-{
-    echo '404';
-}
-else
-{
-    //Note: you would likely use some other http status codes depending
-    // on the specific Exception thrown.
-    try {
-        $dispatcher->dispatch( $found_route );
-    } catch ( badClassNameException $e ) {
-        PageError::show('404', $url);
-    } catch ( classFileNotFoundException $e ) {
-        echo 'class file not found'.$e;
-    } catch ( classNameNotFoundException $e ) {
-        PageError::show('404', $url);
-    } catch ( classMethodNotFoundException $e ) {
-        PageError::show('404', $url);
-    } catch ( classNotSpecifiedException $e ) {
-        PageError::show('404', $url);
-    } catch ( methodNotSpecifiedException $e ) {
-        PageError::show('404', $url);
-    }
-}
-
-
-/* Abstraction to allow config class to be dynamic.
- *
- */
 class Starch
 {
-    /* Starts the framework
+    /**
+     * Class Constructor
      * @param Starch_Config
-     * @return null;
      */
-    public function Starch(Starch_Config $config)
+    public function __construct(Starch_Config $config)
     {
         $this->config   = $config;
         $this->base_url = $this->getBaseURL();
-
-        $this->_router = new Starch_Router; 
+ 
         $this->_loadApps();
-        return null;
     }
 
     public function getBaseURL()
     {
         return urldecode($_SERVER['REQUEST_URI']);
     }
- 
+
+    /**
+     * Load all of the apps that are in the config
+     */
     private function _loadApps()
     {
+        $router     = new Starch_Router;
+        $dispatcher = new Starch_Dispatcher;
+        $dispatcher->setSuffix($this->config->app_suffix);
         if(count($this->config->apps)){
             foreach($this->config->apps as $app){ 
                 require_once BASE_DIR.'/apps/'.$app.'/'.$app.'.php';
+                //load the routes
+                $this->_route_app($router, $dispatcher, $app);
+                $dispatcher->setClassPath(BASE_DIR.'/apps/'.$app.'/controllers/');
             }
         }
+        $found_route = $router->findRoute($this->base_url);
+
+        if( FALSE === $found_route )
+        {
+            echo sprintf('Page not found %s', $this->base_url);
+        }
+        else
+        {
+
+        try {
+            $dispatcher->dispatch( $found_route );
+        } catch ( badClassNameException $e ) {
+            PageError::show('404', $url);
+        } catch ( classFileNotFoundException $e ) {
+            echo 'class file not found'.$e;
+        } catch ( classNameNotFoundException $e ) {
+            PageError::show('404', $url);
+        } catch ( classMethodNotFoundException $e ) {
+            PageError::show('404', $url);
+        } catch ( classNotSpecifiedException $e ) {
+            PageError::show('404', $url);
+        } catch ( methodNotSpecifiedException $e ) {
+            PageError::show('404', $url);
+        }
+
+        }
     }
-    /* Creates routing object from each apps routes file
+
+    /**
+     * Creates routing object from each apps routes file
      * @param string $app_name
-     *
+     * @return Starch_Router
+     * @access private 
      */
-    private function _route_app($app_name)
+    private function _route_app(Starch_Router $router, Starch_Dispatcher $dispatcher, $app_name)
     {
-        require_once BASE_DIR.'/apps/'.$app_name.'/routes.php';
-
-
-
+        //include app urls
+        require_once BASE_DIR.'/apps/'.$app_name.'/urls.php';
+        $app_name_urls = $app_name.'_urls';
+        $app_urls = new $app_name_urls;
+        //cycle through each app  url
+        foreach($app_urls->urls() as $url){
+            $route = new Starch_Route($url[0]);
+            $route->setMapClass($app_name);  
+            $route->setMapMethod($url[1]);      
+            $router->addRoute($url[2], $route );            
+        }
+        return $router;  
     }    
 
 }

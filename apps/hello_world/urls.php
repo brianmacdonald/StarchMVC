@@ -6,7 +6,29 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */ 
 
-$hello_world_urls = array(
-        //'url'=>'method',
-        ''=>'',
-    );
+
+
+class hello_world_urls
+{
+
+    /**
+     * Builds array of url parameters
+     * @param string $url
+     * @param string $method
+     * @param string $name
+     * @return array
+     */
+    public function url($url, $method, $name)
+    {
+        return array($url, $method, $name);    
+    }
+
+    public function urls()
+    {
+         return array(
+             $this->url('/starch/', 'welcome', 'welcome'),
+             $this->url('/starch/index.php/colors/', 'colors', 'colors'),
+         ); 
+    }
+   
+}
