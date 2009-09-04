@@ -1,38 +1,24 @@
 <?php
-/*StarchMVC
- *
- *
- *
- */
+/**
+ * @package StarchMVC
+ * @author Brian Macdonald <brian@zycot.com>
+ * @copyright Copyright (c) 2009, Brian Macdonald
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
+ */  
 
 require_once BASE_DIR.'/lib/php-router/php-router.php';
 
-/*
- *
+/**
+ * Starch wrapper for php-router Router class
  */
-class Starch_PHP_Router extends Router
-{
+class Starch_PHP_Router extends Router{}
 
- //wrapper
-
-}
-
-/*
- *
+/**
+ * Starch wrapper for php-router Dispatcher class
  */
-class Starch_PHP_Dispatcher extends Dispatcher 
-{
+class Starch_PHP_Dispatcher extends Dispatcher{}
 
-    //wrapper
-
-}
-
-/*
- *
+/**
+ * Starch wrapper for php-router Route class
  */
-class Starch_PHP_Route extends Route
-{
-
-    //wrapper
-
-}
+class Starch_PHP_Route extends Route{}

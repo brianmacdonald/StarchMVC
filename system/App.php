@@ -6,8 +6,8 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */  
 
-/* App abstration class
- *
+/** 
+ * App abstration class
  */
 class App
 {
