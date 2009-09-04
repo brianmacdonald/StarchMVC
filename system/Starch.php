@@ -8,6 +8,7 @@
 require_once BASE_DIR.'/system/config.php';
 
 require_once BASE_DIR.'/system/App.php';
+require_once BASE_DIR.'/system/Starch/Error.php';  
 require_once BASE_DIR.'/system/Starch/Router.php';
 require_once BASE_DIR.'/system/Starch/Template.php';
 
@@ -18,17 +19,12 @@ class Starch
      * Class Constructor
      * @param Starch_Config
      */
-    public function __construct(Starch_Config $config)
+    public function __construct(Starch_Config $config )
     {
-        $this->config   = $config;
-        $this->base_url = $this->getBaseURL();
+        $this->config = $config;
  
         $this->_loadApps();
-    }
 
-    public function getBaseURL()
-    {
-        return urldecode($_SERVER['REQUEST_URI']);
     }
 
     /**
@@ -47,32 +43,7 @@ class Starch
                 $dispatcher->setClassPath(BASE_DIR.'/apps/'.$app.'/controllers/');
             }
         }
-        $found_route = $router->findRoute($this->base_url);
-
-        if( FALSE === $found_route )
-        {
-            echo sprintf('Page not found %s', $this->base_url);
-        }
-        else
-        {
-
-        try {
-            $dispatcher->dispatch( $found_route );
-        } catch ( badClassNameException $e ) {
-            PageError::show('404', $url);
-        } catch ( classFileNotFoundException $e ) {
-            echo 'class file not found'.$e;
-        } catch ( classNameNotFoundException $e ) {
-            PageError::show('404', $url);
-        } catch ( classMethodNotFoundException $e ) {
-            PageError::show('404', $url);
-        } catch ( classNotSpecifiedException $e ) {
-            PageError::show('404', $url);
-        } catch ( methodNotSpecifiedException $e ) {
-            PageError::show('404', $url);
-        }
-
-        }
+        $router->dispatch_routes($dispatcher);
     }
 
     /**
