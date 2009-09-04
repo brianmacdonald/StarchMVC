@@ -1,10 +1,10 @@
 <?php
-/*StarchMVC
- *
- *
- *
+/**
+ * @package StarchMVC
+ * @author Brian Macdonald <brian@zycot.com>
+ * @copyright Copyright (c) 2009, Brian Macdonald
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */
-
 require_once BASE_DIR.'/system/config.php';
 
 require_once BASE_DIR.'/system/App.php';
@@ -69,10 +69,19 @@ class Starch
      */
     public function Starch(Starch_Config $config)
     {
+        $this->config   = $config;
+        $this->base_url = $this->getBaseURL();
+
+        $this->_router = new Starch_Router; 
         $this->_loadApps();
         return null;
     }
 
+    public function getBaseURL()
+    {
+        return urldecode($_SERVER['REQUEST_URI']);
+    }
+ 
     private function _loadApps()
     {
         if(count($this->config->apps)){
@@ -81,5 +90,16 @@ class Starch
             }
         }
     }
+    /* Creates routing object from each apps routes file
+     * @param string $app_name
+     *
+     */
+    private function _route_app($app_name)
+    {
+        require_once BASE_DIR.'/apps/'.$app_name.'/routes.php';
+
+
+
+    }    
 
 }

@@ -1,26 +1,29 @@
 <?php
-/* StarchMVC
- *
- *
- *
- *
- */
+/**
+ * @package StarchMVC
+ * @author Brian Macdonald <brian@zycot.com>
+ * @copyright Copyright (c) 2009, Brian Macdonald
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
+ */ 
 
-
-/* Sample app for framework.
+/**
+ * Sample app for framework.
  *
  */
 class hello_world_default extends App
 {
 
+    /**
+     * Renders hello world homepage.
+     */
     public function welcome()
     {
+        //context as array
+        $context = array(
+            'name'=>'Hello World',
+            );
        
-        $this->buildTemplate();
-
-        $this->assignTag('name', 'Hello World');
-
-        $this->render(BASE_DIR.'/apps/hello_world/views/base.html');    
+        $this->render($context, 'hello_world/views/base.html');    
 
     }
 

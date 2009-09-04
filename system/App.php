@@ -1,46 +1,40 @@
 <?php
-/* StarchMVC
- *
- *
- *
- */
+/**
+ * @package StarchMVC
+ * @author Brian Macdonald <brian@zycot.com>
+ * @copyright Copyright (c) 2009, Brian Macdonald
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
+ */  
 
 /* App abstration class
  *
  */
 class App
 {
-    /*
-     *
+    /**
+     * @param string $template_name
+     * return full path to template
      */
-    public function buildTemplate()
+    public function getTemplatePath($template_name)
     {
-        $this->template = new Starch_Template();
+         $template_base = BASE_DIR.'/apps/'; 
+         return $template_base.$template_name;
     }
 
-    /* Assigns tag for template system
-     * @param string $tagname
-     * @param string $value
-     */
-    protected function assignTag($tagname, $value)
-    {    
-        if($this->template){
-            $this->template->assign($tagname, $value);
-        }
-    }
-
-    /* Displays view
+    /**
+     * Displays view
+     * @param array  $context
      * @param string $template_name
      */
-    protected function render($template_name)
+    public function render($context, $template_name)
     {
-        if($this->template){  
-            $this->template_name = $template_name;
-            if($this->app_dir){
-                $this->template_name = $this->app_dir.$template_name;
-            }
-                $this->template->display($this->template_name);
-            } 
+        $template = new Starch_Template;
+        foreach($context as $key=>$value){
+            $template->assign($key, $value);
+        }
+        $template_path = $this->getTemplatePath($template_name);
+        return $template->display($template_path);
+          
     }
 
 
