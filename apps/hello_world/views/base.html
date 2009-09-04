@@ -9,7 +9,12 @@
         <div>
                {$name}
         </div>
-
+        <p>Here are some colors:</p>
+        <ul>
+            {foreach from=$colors item=color}
+            <li>{$color}</li>
+            {/foreach}
+        </ul>
     </body>
 
 </html>

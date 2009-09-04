@@ -8,7 +8,6 @@
 
 /**
  * Sample app for framework.
- *
  */
 class hello_world_default extends App
 {
@@ -18,9 +17,17 @@ class hello_world_default extends App
      */
     public function welcome()
     {
+        //This will be a database object
+        $colors = array(
+            'Red',
+            'Blue',
+            'Yellow',
+            'Green',
+            );
         //context as array
         $context = array(
             'name'=>'Hello World',
+            'colors'=>$colors,
             );
        
         $this->render($context, 'hello_world/views/base.html');    
