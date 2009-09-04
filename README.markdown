@@ -1,11 +1,12 @@
 StarchMVC
 =========
 
-A Lightweight PHP framework. Currently at very early stages and should NOT BE USED BY ANYONE.
+A Lightweight PHP framework. Currently at very early stages.
 
 Dependencies
 ------------
 
- - Smarty Templates
- - Outlet ORM
- - php-router
+Put the following in the libs/ directory.
+ - Smarty Templates as Smarty/
+ - Outlet ORM as outlet/ (only the classes)
+ - php-router as php-router/
