@@ -7,6 +7,7 @@ Dependencies
 ------------
 
 Put the following in the libs/ directory.
+
  - Smarty Templates as Smarty/
  - Outlet ORM as outlet/ (only the classes)
  - php-router as php-router/
