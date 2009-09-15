@@ -65,7 +65,8 @@ class Starch_Request
 
     private function _setURI()
     {
-        $this->_uri = urldecode($_SERVER['REQUEST_URI']);
+        $uri = urldecode($_SERVER['REQUEST_URI']);  
+        $this->_uri = preg_replace('/^([^?]*).*$/', '$1', $uri);  
         $this->_uri_array = explode($this->_uri,'/');
     }
 
