@@ -2,8 +2,13 @@ Options +FollowSymLinks
 IndexIgnore */*
 # Turn on the RewriteEngine
 RewriteEngine On
-#  Rules
-RewriteCond %{REQUEST_FILENAME} !-f
+# Uncomment following line if your webserver's URL
+# is not directly related to physical file paths.
+RewriteBase /starch
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?/$1 [QSA,L]
+
+
+   
 

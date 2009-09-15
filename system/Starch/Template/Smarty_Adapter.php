@@ -6,14 +6,15 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */
 
-require_once BASE_DIR.'/system/Starch/Template/smarty_wrapper.php';
+require_once BASE_DIR.'/libs/Smarty/Smarty.class.php';  
 
 /** 
- * Starch template system.
+ * Smarty template adapter.
  */
-class Starch_Template extends Starch_Smarty_Template
-{
+class Smarty_Adapter extends Smarty{
 
-
+    public render($template){
+        $this->display($template);
+    }
 
 }

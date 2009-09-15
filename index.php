@@ -6,19 +6,16 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */ 
 
+//Base directory
 define("BASE_DIR", dirname(__FILE__));      
-
+//Framework
 require_once BASE_DIR.'/system/Starch.php';
-require_once BASE_DIR.'/system/config.php';
-
-$config = new Starch_Config;    
+//Your config file
+require_once BASE_DIR.'/config.php';
+//create configuration object
+$config = new Example_Config;    
 
 /** 
- * Starts the framework.
+ * Starts the framework with configuration.
  */
-class Init extends Starch{}
-
-//run code
-$init = new Init($config);
-
-//thanks
+Starch::run($config);

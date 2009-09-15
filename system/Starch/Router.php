@@ -4,54 +4,118 @@
  * @author Brian Macdonald <brian@zycot.com>
  * @copyright Copyright (c) 2009, Brian Macdonald
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
- */    
-
-require_once BASE_DIR.'/system/Starch/Router/php_router_wrapper.php'; 
+ */
 
 /**
- * Url router class
+ * Require Starch_Route class 
  */
-class Starch_Router extends Starch_PHP_Router
-{
+require_once BASE_DIR."/system/Starch/Route.php";
 
-    public function getCurrentURI()
+/**
+ * Singleton pattern class to hold and process all routes across framework.
+ */
+class Starch_Router
+{
+    /**
+     * Instance of Starch_Router class
+     *
+     * @var object Starch_Router
+     * @access private 
+     */
+    private static $instance;
+
+    /**
+     * Array of app routes
+     *
+     * @var array
+     * @access private
+     */
+    private $_routes = array();
+    
+    /**
+     * Boilerplate Singleton method
+     *
+     * @return object Starch_Router
+     *
+     * @access public  
+     */
+    public static function getInstance()
     {
-        return urldecode($_SERVER['REQUEST_URI']); 
+        if(!isset(self::$instance)){
+            $object= __CLASS__;
+            self::$instance=new $object;
+        }
+        return self::$instance;
     }
 
-    public function dispatch_routes(Starch_Dispatcher &$dispatcher)
+    /**
+     * Adds route to routes array
+     *
+     * @param object $route Starch_Route 
+     * @return void
+     *
+     * @access public 
+     */
+    public function addRoute(Starch_Route $route)
     {
-        $found_route = $this->findRoute($this->getCurrentURI());
-        if( FALSE === $found_route ){
-            Error::show('404');
-        }else{
-            try {
-                $dispatcher->dispatch( $found_route );
-            } catch ( badClassNameException $e ) {
-                Error::show('404', $e);
-            } catch ( classFileNotFoundException $e ) {
-                Error::show('404', $e);
-            } catch ( classNameNotFoundException $e ) {
-                Error::show('404', $e);
-            } catch ( classMethodNotFoundException $e ) {
-                Error::show('404', $e);
-            } catch ( classNotSpecifiedException $e ) {
-                Error::show('404', $e);
-            } catch ( methodNotSpecifiedException $e ) {
-                Error::show('404', $e);
+        $this->_routes[] = $route;
+    }
+
+    /**
+     * Gets routes array
+     *
+     * @return array
+     *
+     * @access public
+     */
+    public function getRoutes()
+    {
+        return $this->_routes;
+    }
+
+    /**
+     * Looks at all of the urls in the config file and builds a route object
+     * from each url array then adds it to the array.
+     *
+     * @param object $config Starch_Config
+     * @return void
+     *
+     * @access public
+     */
+    public function addRoutesFromConfig(Starch_Config $config)
+    {
+        if(!$config->urls){ die('No urls found'); }
+        foreach($config->urls as $url){
+            $route = new Starch_Route($url);
+            $this->addRoute($route);    
+        }
+    }
+
+    /**
+     * Find route from routes array using uri and returns 
+     * that route object.
+     *
+     * @param string $uri
+     * @return null|object Starch_Route Null if no route is found.
+     *
+     * @access public
+     */
+    public function route($uri)
+    {
+        $routes = $this->_routes;
+        #TODO: Starch error to throw 500 
+        if(!$routes){ die('No routes found'); }
+        //find the route in the routes array
+        foreach($routes as $route){
+                $url = $route->getUrls();
+            if($url['uri'] == $uri){
+                return $url;
+            }else{
+                #TODO: Starch error to throw 404
+                die('404 '.$uri.' not found');
+                return null;
             }
-        }   
-    }     
+        }
+    }
 
-}
-
-class Starch_Dispatcher extends Starch_PHP_Dispatcher
-{
-
-}
-
-class Starch_Route extends Starch_PHP_Route
-{
-
-
-}
+}  

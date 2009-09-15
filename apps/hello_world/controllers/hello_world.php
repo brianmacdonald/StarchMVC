@@ -6,9 +6,16 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */  
 
-/*
-$hello_word = new Starch_Router( '/orders/show/:order_id' );
-$route->setMapClass( 'orders' );
-$route->setMapMethod( 'show' );
-$route->addDynamicElement( ':order_id', '^\d{5}$' );
+/**
+ * Example app
  */
+class hello_world extends Starch_Controller
+{
+
+    function index()
+    {
+        echo 'Hello World!';
+    }
+
+}
+

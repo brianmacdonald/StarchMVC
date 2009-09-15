@@ -7,12 +7,17 @@
  */ 
 
 
-class Error 
+class Starch_Model
 {
 
-    public function Show($status_code, $error='')
+    /**
+     * Builds the model
+     */
+    public function __construct()
     {
-        echo implode(array($status_code, $error), ' ');
+    
     }
 
-}
+
+
+} 

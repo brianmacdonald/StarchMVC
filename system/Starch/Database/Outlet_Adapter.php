@@ -6,13 +6,9 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */ 
 
+require_once BASE_DIR.'/libs/outlet/outlet.php'; 
 
-class Error 
+class Outlet_Adapter extends 
 {
-
-    public function Show($status_code, $error='')
-    {
-        echo implode(array($status_code, $error), ' ');
-    }
 
 }
