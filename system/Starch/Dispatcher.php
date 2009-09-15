@@ -6,17 +6,50 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */   
 
+/**
+ * Calls the method of a requested uri.
+ */
 class Starch_Dispatcher
 {
-
+    /**
+     * Path to app
+     *
+     * @var string
+     * @access private
+     */
     private $_app_path;
 
+    /**
+     * Controller name
+     *
+     * @var string
+     * @access private
+     */   
     private $_controller;
 
+    /**
+     * Method name
+     *
+     * @var string
+     * @access private    
+     */
     private $_method; 
 
+    /**
+     * Array of arguments
+     *
+     * @var array
+     * @access private
+     */
     private $_arguments = array();
 
+    /**
+     * Finds the route from the request uri then loads the route 
+     * adds the request as an argument and calls the method.
+     *
+     * @param object $request Starch_Request
+     * @return void
+     */
     public function __construct(Starch_Request $request)
     {
         //find route
@@ -27,7 +60,7 @@ class Starch_Dispatcher
         $this->addArguments(array($request));    
         //call method
         $method_array = array($this->getController(), $this->getMethod());
-        call_user_func($method_array, $this->getArguments()); 
+        call_user_func_array($method_array, $this->getArguments());
     }
 
     /**
@@ -81,7 +114,11 @@ class Starch_Dispatcher
 
     public function addArguments($args)
     {
-        $this->_arguments = array_merge($this->_arguments, $args);
+        $args_array = $args;
+        if(!is_array($args)){
+            $args_array = array($args);    
+        }
+        $this->_arguments = array_merge($this->_arguments, $args_array);
     }      
 
     public function getArguments()
