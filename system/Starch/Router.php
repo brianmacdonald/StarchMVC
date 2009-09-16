@@ -116,7 +116,7 @@ class Starch_Router
             #TODO: Starch error to throw 404
             die('404 '.$uri.' not found');
         }
-        return $found_url;
+        return $found_route;
     }
 
 }  
