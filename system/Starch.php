@@ -6,7 +6,6 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */
 
-
 require_once BASE_DIR.'/system/Starch/Request.php';
 require_once BASE_DIR.'/system/Starch/Dispatcher.php'; 
 require_once BASE_DIR.'/system/Starch/Router.php';
@@ -22,11 +21,16 @@ final class Starch
 {
     /**
      * @var Starch_Config object
+     * @access private
      */
     static private $_config;
 
     /**
      * Runs framework
+     *
+     * @param object $config Starch_Conifg
+     * @return void
+     * @access public
      */
     public function run(Starch_Config $config)
     {
