@@ -8,32 +8,60 @@
 
 
 /**
- *
+ * Takes route array, formats and allows later access
  */
 class Starch_Route
 {
 
-    private $_array;
+    /**
+     * Array containing parameter for the route
+     *
+     * @var array
+     * @access private 
+     */
+    private $_route_array = array();
 
     /**
      * Builds the route
+     *
      * @param array $url_array
+     * @return void
+     * @access public
      */
     public function __construct($url_array)
     {
-        $this->_array = array(
-            'uri'=>$url_array[0],
-            'app_path'=>$url_array[1],
-            'controller'=>$url_array[2],
-            'method'=>$url_array[3], 
-            'arguments'=>''
-            //'name'=>$url_array[4]
-            ); 
+        //Check if array is correct length
+        if(count($url_array) >= 5){
+            $this->_array = array(
+                'uri'=>$url_array[0],
+                'app_path'=>$url_array[1],
+                'controller'=>$url_array[2],
+                'method'=>$url_array[3], 
+                'arguments'=>''
+            );
+            //Add name to array
+            if($url_array[5]){
+                $this->_array['name'] = $url_array[5];   
+            }
+        }else{
+            //TODO: Add Starch Error throw 500
+        }            
     }
 
-    public function getUrls()
+    /**
+     * Returns array of route parameters
+     *
+     * @param string $var Optional
+     * @return array|string 
+     * @access public   
+     */
+    public function getUrls($var='')
     {
-        return $this->_array;
+        $route_array = $this->_route_array;
+        if($var && in_array($var, $route_array)){
+            return $route_array[$var];
+        }
+        return $route_array;   
     }
 
 } 
