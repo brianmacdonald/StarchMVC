@@ -8,21 +8,47 @@
 
 
 /**
- *
+ * Framework user request
  */
 class Starch_Request
 {
+    /**
+     * $_GET request array
+     *
+     * @var array
+     * @access private
+     */
+    private $_get_request = array();
 
-    private $_get_request;
+    /**
+     * $_POST request array
+     *
+     * @var array
+     * @access private
+     */ 
+    private $_post_request = array();
 
-    private $_post_request;
-
+    /**
+     * URI string
+     *
+     * @var string
+     * @access private
+     */
     private $_uri;
 
+    /**
+     * Array of uri segments split by '/'
+     *
+     * @var array
+     * @access private
+     */    
     private $_uri_array = array();
 
     /**
+     * Set all properties when object is created
      *
+     * @return void
+     * @access public
      */
     public function __construct()
     {
@@ -32,7 +58,10 @@ class Starch_Request
     }
 
     /**
+     * Set get request array
      *
+     * @return void
+     * @access private
      */ 
     private function _setGetRequest()
     {
@@ -40,11 +69,19 @@ class Starch_Request
     }
 
     /**
+     * Returns get request array or value from key
      *
+     * @param string $var Optional
+     * @return array|string 
+     * @access public  
      */     
-    public function getGetRequest()
+    public function getGetRequest($var='')
     {
-        return $this->_get_request;
+        $request = $this->_get_request;
+        if($var && in_array($var, $request)){
+            return $request[$var];
+        }
+        return $request;
     }
 
     /**
@@ -56,13 +93,27 @@ class Starch_Request
     }  
 
     /**
+     * Returns get request array or value from key
      *
+     * @param string $var Optional
+     * @return array|string 
+     * @access public
      */     
-    public function getPostRequest()
+    public function getPostRequest($var='')
     {
-        return $this->_post_request;
+        $request = $this->_post_request;
+        if($var && in_array($var, $request)){
+            return $request[$var];
+        }
+        return $request;  
     } 
 
+    /**
+     * Sets uri as string and array
+     *
+     * @return void
+     * @access private
+     */
     private function _setURI()
     {
         $uri = urldecode($_SERVER['REQUEST_URI']);  
@@ -70,11 +121,23 @@ class Starch_Request
         $this->_uri_array = explode($this->_uri,'/');
     }
 
+    /**
+     * Gets uri as string
+     *
+     * @return string
+     * @access public
+     */
     public function getURI()
     {
         return $this->_uri;
     }    
 
+    /**
+     * Gets uri as array
+     *
+     * @return array
+     * @access public
+     */
     public function getURIArray()
     {
         return $this->_uri_array;
