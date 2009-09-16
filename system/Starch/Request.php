@@ -85,8 +85,11 @@ class Starch_Request
     }
 
     /**
+     * Set post request array
      *
-     */     
+     * @return void
+     * @access private
+     */    
     private function _setPostRequest()
     {
         $this->_post_request = $_POST;         

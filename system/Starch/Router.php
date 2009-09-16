@@ -104,18 +104,19 @@ class Starch_Router
     {
         $routes = $this->_routes;
         #TODO: Starch error to throw 500 
-        if(!$routes){ die('No routes found'); }
+        if(!$routes){ die('No routes found');}
         //find the route in the routes array
-        foreach($routes as $route){
-                $url = $route->getUrls();
-            if($url['uri'] == $uri){
-                return $url;
-            }else{
-                #TODO: Starch error to throw 404
-                die('404 '.$uri.' not found');
-                return null;
+        foreach($routes as $route){   
+            $url = $route->getUrl('uri');
+            if($url == $uri){
+                $found_route = $route;
             }
         }
+        if(!$found_route){
+            #TODO: Starch error to throw 404
+            die('404 '.$uri.' not found');
+        }
+        return $found_url;
     }
 
 }  

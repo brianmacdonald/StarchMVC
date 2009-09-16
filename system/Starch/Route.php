@@ -32,7 +32,7 @@ class Starch_Route
     {
         //Check if array is correct length
         if(count($url_array) >= 5){
-            $this->_array = array(
+            $this->_route_array = array(
                 'uri'=>$url_array[0],
                 'app_path'=>$url_array[1],
                 'controller'=>$url_array[2],
@@ -41,10 +41,11 @@ class Starch_Route
             );
             //Add name to array
             if($url_array[5]){
-                $this->_array['name'] = $url_array[5];   
+                $this->_route_array['name'] = $url_array[5];   
             }
         }else{
             //TODO: Add Starch Error throw 500
+            die('URL array is not correct length.');
         }            
     }
 
@@ -55,10 +56,10 @@ class Starch_Route
      * @return array|string 
      * @access public   
      */
-    public function getUrls($var='')
-    {
+    public function getUrl($var='')
+    {  
         $route_array = $this->_route_array;
-        if($var && in_array($var, $route_array)){
+        if($var && array_key_exists($var, $route_array)){
             return $route_array[$var];
         }
         return $route_array;   

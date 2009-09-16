@@ -19,7 +19,9 @@ class Example_Config extends Starch_Config
             array('/starch/',
                   '/apps/hello_world/controllers/hello_world',
                   'hello_world',
-                  'index'),
+                  'index',
+                  ''
+                  ),
          );
 
 

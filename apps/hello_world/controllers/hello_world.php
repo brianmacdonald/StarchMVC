@@ -12,9 +12,10 @@
 class hello_world extends Starch_Controller
 {
 
-    function index()
+    public function index($request)
     {
         echo 'Hello World!';
+        print_r($request->getPostRequest());
     }
 
 }

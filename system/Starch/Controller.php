@@ -39,7 +39,7 @@ abstract class Starch_Controller
         if(!$template){
             $template = $this->getTemplate();
         }
-        //var $adapter = new self::_config->template_engine.'_Adapter';
+        //$adapter = new self::_config->template_engine.'_Adapter';
         foreach($this->_tags as $tag_key=>$tag_value){
             $adapter->append($tag_key, $tag_value);
             $adapter->render($template);
