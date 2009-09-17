@@ -22,7 +22,7 @@ class Starch_Router
      * @var object Starch_Router
      * @access private 
      */
-    private static $instance;
+    private static $_instance;
 
     /**
      * Array of app routes
@@ -41,11 +41,11 @@ class Starch_Router
      */
     public static function getInstance()
     {
-        if(!isset(self::$instance)){
+        if(!isset(self::$_instance)){
             $object= __CLASS__;
-            self::$instance=new $object;
+            self::$_instance=new $object;
         }
-        return self::$instance;
+        return self::$_instance;
     }
 
     /**
