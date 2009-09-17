@@ -6,6 +6,12 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */ 
 
+require_once BASE_DIR."/system/Starch/Template/Smarty_Adapter.php";
+
+/**
+ *
+ */
+
 abstract class Starch_Controller
 {
     public function getStarchConfig()

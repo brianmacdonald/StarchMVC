@@ -6,14 +6,15 @@
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License  
  */
 
-require_once BASE_DIR.'/libs/Smarty/Smarty.class.php';  
+require_once BASE_DIR.'/lib/Smarty/Smarty.class.php';  
 
 /** 
  * Smarty template adapter.
  */
 class Smarty_Adapter extends Smarty{
 
-    public render($template){
+    public function render($template)
+    {
         $this->display($template);
     }
 

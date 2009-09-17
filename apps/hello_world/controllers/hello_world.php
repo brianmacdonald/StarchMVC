@@ -15,7 +15,7 @@ class hello_world extends Starch_Controller
     public function index($request)
     {
         echo 'Hello World! <br/>';
-        echo 'Site name is ' . parent::getStarchConfig()->sitename;
+        echo 'Site name is ' . parent::getStarchConfig()->site_name;
     }
 
 }
