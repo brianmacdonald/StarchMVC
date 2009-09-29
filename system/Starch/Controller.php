@@ -8,6 +8,10 @@
 
 abstract class Starch_Controller
 {
+    public function getStarchConfig()
+    {
+        return Starch::getConfig();
+    }
 
     public function addTag($tag_key, $tag_value)
     {
