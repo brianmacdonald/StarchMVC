@@ -40,7 +40,7 @@ class Starch_Route
                 'arguments'=>''
             );
             //Add name to array
-            if($url_array[5]){
+            if(array_key_exists(5, $url_array)){
                 $this->_route_array['name'] = $url_array[5];   
             }
         }else{
