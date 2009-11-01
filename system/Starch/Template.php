@@ -15,8 +15,9 @@ class Template
     * Render the template
     * @param string $template_path
     * @param array $var_array
+    * @return string
     */
-    function __constuct($template_path, $var_array)
+    public function __constuct($template_path, $var_array)
     {
         foreach($var_array as $key=>$value) {
             $this->$key = $value;
@@ -24,6 +25,16 @@ class Template
         ob_start();
         include $template_path
         return ob_get_clean();
+    }
+
+    /**
+     * Escapes string
+     * @param string $unsafe
+     * @return string 
+     */
+    private function escape($unsafe)
+    {
+        return htmlspecialchars($unsafe);
     }
  
 } 
